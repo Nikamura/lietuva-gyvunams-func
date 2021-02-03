@@ -12,8 +12,11 @@ if (!BOT_TOKEN || !CHAT_ID) {
 
 const bot = new Telegraf(BOT_TOKEN);
 
-export default (request: NowRequest, response: NowResponse) => {
+export default async (request: NowRequest, response: NowResponse) => {
   const { query, body, headers } = request;
-  bot.telegram.sendMessage(CHAT_ID, JSON.stringify({ query, body, headers }));
+  await bot.telegram.sendMessage(
+    CHAT_ID,
+    JSON.stringify({ query, body, headers })
+  );
   response.status(200).send(`Thanks! Come again!`);
 };
